@@ -113,6 +113,7 @@ use {
         time::{Duration, Instant},
     },
     tempfile::TempDir,
+    ahash::{AHashMap, AHashSet},
 };
 
 const PAGE_SIZE: u64 = 4 * 1024;
@@ -766,8 +767,8 @@ impl<'a> MultiThreadProgress<'a> {
 pub type AtomicAppendVecId = AtomicU32;
 pub type AppendVecId = u32;
 
-type AccountSlots = HashMap<Pubkey, HashSet<Slot>>;
-type SlotOffsets = HashMap<Slot, HashSet<usize>>;
+type AccountSlots = AHashMap<Pubkey, HashSet<Slot>>;
+type SlotOffsets = AHashMap<Slot, HashSet<usize>>;
 type ReclaimResult = (AccountSlots, SlotOffsets);
 type PubkeysRemovedFromAccountsIndex = HashSet<Pubkey>;
 type ShrinkCandidates = IntSet<Slot>;
